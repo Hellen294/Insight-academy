@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insight Academy Kwamba</title>
+    <style>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .logo-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+
+        .logo-container img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+
+        .ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            border: 2px dashed white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        .ring:nth-child(2) {
+            animation: rotate 10s linear infinite;
+        }
+
+        .ring:nth-child(3) {
+            width: 120px;
+            height: 120px;
+            animation: rotate 15s linear infinite reverse;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 10px 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            padding: 0 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        main {
+            flex: 1;
+            padding: 20px;
+            padding-bottom: 60px;
+        }
+
+        .slider {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+        }
+
+        .slide {
+            display: none;
+        }
+
+        .slide img {
+            width: 100%;
+        }
+
+        .text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .fade {
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @keyframes fade {
+            from {opacity: .4}
+            to {opacity: 1}
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        main section {
+            padding: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        form label {
+            margin-top: 10px;
+        }
+
+        form input, form textarea {
+            padding: 10px;
+            margin-top: 5px;
+        }
+
+        form button {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        h1 {
+            color: white;
+            font-size: 24px;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        article {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        article img {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+
+        article div {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        article h2, article h3 {
+            color: #333;
+        }
+
+        article p, article ul {
+            color: #555;
+            text-align: left;
+        }
+.fade-in {
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+        .text {
+            /* Your existing styles */
+            opacity: 0; /* Initially hide the text */
+            animation: fadeInAndFlyIn 3s forwards; /* Apply animation to fade in and fly in text */
+        }
+
+        @keyframes fadeInAndFlyIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(50px); /* Start offscreen */
+            }
+            50% {
+                opacity: 1; /* Fade in */
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0); /* Fly in */
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let slideIndex = 0;
+            showSlides();
+
+            function showSlides() {
+                let slides = document.querySelectorAll(".slide");
+                slides.forEach(slide => {
+                    slide.style.display = "none";
+                    slide.querySelector('.text').style.display = "none";
+                });
+                slideIndex++;
+                if (slideIndex > slides.length) {
+                    slideIndex = 1;
+                }
+                slides[slideIndex - 1].style.display = "block";
+                slides[slideIndex - 1].querySelector('.text').style.display = "block";
+                setTimeout(() => {
+                    slides[slideIndex - 1].style.display = "none";
+                    showSlides();
+                }, 7000); // Change image every 7 seconds (including fade in/out and fly in/out time)
+            }
+        });
+    </script>
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="academics.html">Academics</a></li>
+                <li><a href="admissions.html">Admissions</a></li>
+                <li><a href="events.html">Events</a></li>
+            </ul>
+        </nav>
+        <div class="logo-container">
+            <img src="https://marketplace.canva.com/EAFuPD7aEBw/3/0/1600w/canva-simple-flat-illustrative-badge-logo-zAxYE1kEeFQ.jpg" alt="Insight Academy Kwamba Logo">
+            <div class="ring"></div>
+            <div class="ring"></div>
+        </div>
+        <h1>INSIGHT ACADEMY KWAMBA - Academics</h1>
+    </header>
+    <main>
+        <div class="slider">
+            <div class="slide fade">
+                <img src="https://media.istockphoto.com/id/1410950079/photo/modern-style-classroom-in-the-morning-3d-render.webp?b=1&s=170667a&w=0&k=20&c=D3KekIGN_W76ScIe_vKZURixg0hXdXnbPfhKywcItro=" alt="Academics Slide 1">
+                <div class="text">Academic Programs</div>
+            </div>
+            <div class="slide fade">
+                <img src="https://media.istockphoto.com/id/1409722748/photo/students-raising-hands-while-teacher-asking-them-questions-in-classroom.jpg?s=612x612&w=0&k=20&c=NbVChOV9wIbQOhUD6BqpouZHHBbyQ2rkSjaVfIhpMv8=" alt="Academics Slide 2">
+                <div class="text">Excellence in Education</div>
+            </div>
+            <div class="slide fade">
+                <img src="https://media.istockphoto.com/id/1468140092/photo/happy-elementary-students-raising-their-hands-on-a-class-at-school.webp?b=1&s=170667a&w=0&k=20&c=UUOuFShFZNLSiy0kYvy504-jVPMr8S_7hhNp40z8m44=" alt="Academics Slide 3">
+                <div class="text">Innovative Curriculum</div>
+            </div>
+        </div>
+        <section>
+            <h2>Academic Programs</h2>
+            <p>Our academic programs are designed to provide students with a comprehensive education that prepares them for future success...</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Insight Academy Kwamba. All rights reserved.</p>
+    </footer>
+</body>
+</html>
